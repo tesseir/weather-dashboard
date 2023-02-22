@@ -1,12 +1,6 @@
-//051b8e174ef9d8e5193f8360d6bfbf0e
-
-//https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key} (remember future 5 days are between 3 hours)
-
 const apiKey = '051b8e174ef9d8e5193f8360d6bfbf0e'
 
 async function geocodeCity(city) {
-
-
     const httpResult = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
     return (await httpResult.json())[0]
 }
@@ -50,10 +44,12 @@ window.onCityBtnClk = async function (cityName = '') {
         localStorage.setItem('cities', JSON.stringify([cityName, ...currentCities]))
     }
 
+    function w(weatherDay, weather) {
+        document.getElementById(`t${weatherDay + 1}`).innerText = weather
+    }
+
     function t(temperatureDay, temp) {
         document.getElementById(`t${temperatureDay + 1}`).innerText = temp
-
-
     }
 
     function h(humidityDay, humidity) {
@@ -77,7 +73,7 @@ window.onCityBtnClk = async function (cityName = '') {
 
     const forecast = await getForecast(geoCity);
 
-    console.log('curent weather', curWeather);
+    console.log('forcast', forecast);
 
 
     // 4 - display current weather
@@ -90,11 +86,10 @@ window.onCityBtnClk = async function (cityName = '') {
     // 5 - display next 5 days
 
     for (let i = 0; i < 5; i++) {
+        w(i, (forecast.list[i].weather[0].description))    
         t(i, kf(forecast.list[i].main.temp))
         h(i, (forecast.list[i].main.humidity))
     }
-
-    console.log("hello")
 
     // 6 - save searchess
     saveSearch()
@@ -115,11 +110,3 @@ function showSaves() {
 
 showSaves()
 
-// const test = async () => {
-//     const geoCity = await geocodeCity("cottage grove")
-//     const forecast = await getCurrent(geoCity)
-
-//     console.log(forecast)
-// };
-
-// test();
