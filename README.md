@@ -2,11 +2,11 @@
 
 Github Repo: https://github.com/tesseir/weather-dashboard
 
-Deployed Page: 
+Deployed Page: https://tesseir.github.io/weather-dashboard/
 
 ## Image of use:
 
-![Page]()
+![Page](https://raw.githubusercontent.com/tesseir/weather-dashboard/main/assets/Capture.PNG)
 
 ## Usage
 
